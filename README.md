@@ -1,4 +1,4 @@
-# Nginx Unit
+# NGINX Unit tap
 
 This is official [Homebrew](https://brew.sh) tap for [NGINX Unit](https://unit.nginx.org), lightweight, dynamic, open-source server.
 

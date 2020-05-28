@@ -1,13 +1,13 @@
 class UnitJava < Formula
   desc "Java module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.17.0.tar.gz"
-  sha256 "3f7e7c0b3cdd715bb5c0e010231a2987c56fbeadf23c7147632bc76be3cf0378"
+  url "https://unit.nginx.org/download/unit-1.18.0.tar.gz"
+  sha256 "43ffa7b935b081a5e99c0cc875b823daf4f20fc1938cd3483dc7bffaf15ec089"
   head "https://hg.nginx.org/unit", :using => :hg
 
   depends_on :java
   depends_on "openssl@1.1"
-  depends_on "unit@1.17.0"
+  depends_on "unit@1.18.0"
   uses_from_macos "openjdk"
 
   def install

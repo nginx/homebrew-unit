@@ -32,10 +32,11 @@ class UnitRuby < Formula
     system "make", "ruby2.7-install"
   end
 
-  def caveats; <<~EOS
-    Make sure rack gem installed:
-      #{Formula["ruby"].opt_prefix}/bin/gem install rack
-  EOS
+  def caveats
+    <<~EOS
+      Make sure rack gem installed:
+        #{Formula["ruby"].opt_prefix}/bin/gem install rack
+    EOS
   end
 
   test do

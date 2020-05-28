@@ -8,7 +8,6 @@ class UnitJava < Formula
   depends_on :java
   depends_on "openssl@1.1"
   depends_on "unit@1.18.0"
-  uses_from_macos "openjdk"
 
   def install
     system "./configure",

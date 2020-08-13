@@ -1,15 +1,13 @@
 class UnitPhp < Formula
   desc "PHP module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.18.0.tar.gz"
-  sha256 "43ffa7b935b081a5e99c0cc875b823daf4f20fc1938cd3483dc7bffaf15ec089"
-  head "https://hg.nginx.org/unit", :using => :hg
+  url "https://unit.nginx.org/download/unit-1.19.0.tar.gz"
+  sha256 "8cb849420221932685689708235efbfef2024656f856b72887ae9ff1cf75f98b"
+  head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
   depends_on "php-embed"
-  depends_on "unit@1.18.0"
-
-  patch :DATA
+  depends_on "unit@1.19.0"
 
   def install
     system "./configure",
@@ -71,19 +69,3 @@ class UnitPhp < Formula
     Process.kill("TERM", pid)
   end
 end
-
-__END__
-diff --git a/src/nxt_php_sapi.c b/src/nxt_php_sapi.c
---- a/src/nxt_php_sapi.c
-+++ b/src/nxt_php_sapi.c
-@@ -707,7 +707,9 @@ nxt_php_dirname(const nxt_str_t *file, n
- {
-     size_t  length;
- 
--    nxt_assert(file->length > 0 && file->start[0] == '/');
-+    if (file->length == 0 || file->start[0] != '/') {
-+        return NXT_ERROR;
-+    }
- 
-     length = file->length;
- 

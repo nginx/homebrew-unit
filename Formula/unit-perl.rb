@@ -1,13 +1,13 @@
 class UnitPerl < Formula
   desc "Perl module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.18.0.tar.gz"
-  sha256 "43ffa7b935b081a5e99c0cc875b823daf4f20fc1938cd3483dc7bffaf15ec089"
-  head "https://hg.nginx.org/unit", :using => :hg
+  url "https://unit.nginx.org/download/unit-1.19.0.tar.gz"
+  sha256 "8cb849420221932685689708235efbfef2024656f856b72887ae9ff1cf75f98b"
+  head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
   depends_on "perl"
-  depends_on "unit@1.18.0"
+  depends_on "unit@1.19.0"
 
   def install
     system "./configure",
@@ -20,7 +20,7 @@ class UnitPerl < Formula
               "--state=#{var}/state/unit",
               "--tmp=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include -DNXT_HAVE_ISOLATION_ROOTFS=1",
+              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
               "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
 
     inreplace "build/autoconf.data",

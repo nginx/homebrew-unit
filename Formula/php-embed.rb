@@ -2,9 +2,9 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-7.4.9.tar.xz"
-  mirror "https://fossies.org/linux/www/php-7.4.9.tar.xz"
-  sha256 "23733f4a608ad1bebdcecf0138ebc5fd57cf20d6e0915f98a9444c3f747dc57b"
+  url "https://www.php.net/distributions/php-7.4.11.tar.xz"
+  mirror "https://fossies.org/linux/www/php-7.4.11.tar.xz"
+  sha256 "5d31675a9b9c21b5bd03389418218c30b26558246870caba8eb54f5856e2d6ce"
 
   head do
     url "https://github.com/php/php-src.git"

@@ -1,13 +1,13 @@
 class UnitPhp < Formula
   desc "PHP module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.20.0.tar.gz"
-  sha256 "ee39a801f83aff5dfff94336f688fd9cfbd02fee270edd8711b10be4fe298d32"
+  url "https://unit.nginx.org/download/unit-1.21.0.tar.gz"
+  sha256 "9830b66f55fbcb5ef4ee514e558831350e680c0240349541050eee2f6f6ba70d"
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
   depends_on "php-embed"
-  depends_on "unit@1.19.0"
+  depends_on "unit@1.21.0"
 
   def install
     system "./configure",

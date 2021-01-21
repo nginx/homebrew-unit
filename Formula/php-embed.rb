@@ -2,9 +2,9 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-7.4.12.tar.xz"
-  mirror "https://fossies.org/linux/www/php-7.4.12.tar.xz"
-  sha256 "e82d2bcead05255f6b7d2ff4e2561bc334204955820cabc2457b5239fde96b76"
+  url "https://www.php.net/distributions/php-8.0.1.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.0.1.tar.xz"
+  sha256 "208b3330af881b44a6a8c6858d569c72db78dab97810332978cc65206b0ec2dc"
 
   head do
     url "https://github.com/php/php-src.git"
@@ -147,10 +147,10 @@ class PhpEmbed < Formula
 
     inreplace "Makefile", " -module", ""
 
-    system "make", "libphp7.la"
+    system "make", "libphp.la"
 
     lib.mkpath
-    cp ".libs/libphp7.dylib", "#{lib}/"
+    cp ".libs/libphp.dylib", "#{lib}/"
   end
 
   def php_version

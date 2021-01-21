@@ -5,7 +5,6 @@ class UnitJava < Formula
   sha256 "9830b66f55fbcb5ef4ee514e558831350e680c0240349541050eee2f6f6ba70d"
   head "https://hg.nginx.org/unit", using: :hg
 
-  depends_on :java
   depends_on "openssl@1.1"
   depends_on "unit@1.21.0"
 

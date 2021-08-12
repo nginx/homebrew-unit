@@ -2,9 +2,9 @@ class PhpEmbedAT74 < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-7.4.19.tar.xz"
-  mirror "https://fossies.org/linux/www/php-7.4.19.tar.xz"
-  sha256 "6c17172c4a411ccb694d9752de899bb63c72a0a3ebe5089116bc13658a1467b2"
+  url "https://www.php.net/distributions/php-7.4.22.tar.xz"
+  mirror "https://fossies.org/linux/www/php-7.4.22.tar.xz"
+  sha256 "8e078cd7d2f49ac3fcff902490a5bb1addc885e7e3b0d8dd068f42c68297bde8"
 
   depends_on "pkg-config" => :build
   depends_on "php@7.4"

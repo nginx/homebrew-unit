@@ -33,6 +33,11 @@ class Unit < Formula
     (var/"state/unit/certs").mkpath
   end
 
+  service do
+    run [opt_bin/"unitd", "--no-daemon"]
+    run_type :immediate
+  end
+
   test do
     require "socket"
 

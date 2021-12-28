@@ -49,7 +49,7 @@ class Unit < Formula
     (testpath/"index.html").write expected_output
     (testpath/"unit.conf").write <<~EOS
       {
-        "routes": [ { "action": { "share": "#{testpath}" } } ],
+        "routes": [ { "action": { "share": "#{testpath}/$uri" } } ],
         "listeners": { "*:#{port}": { "pass": "routes" } }
       }
     EOS

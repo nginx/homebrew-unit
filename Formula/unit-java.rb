@@ -7,6 +7,7 @@ class UnitJava < Formula
 
   depends_on "openssl@1.1"
   depends_on "unit@1.28.0"
+  depends_on "openjdk@11"
 
   def install
     system "./configure",

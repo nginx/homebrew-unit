@@ -6,8 +6,8 @@ class UnitJava < Formula
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
-  depends_on "unit@1.28.0"
   depends_on "openjdk@11"
+  depends_on "unit@1.28.0"
 
   def install
     system "./configure",

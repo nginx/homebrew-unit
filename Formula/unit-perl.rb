@@ -20,7 +20,7 @@ class UnitPerl < Formula
               "--state=#{var}/state/unit",
               "--tmp=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
+              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include -Wno-compound-token-split-by-macro",
               "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
 
     inreplace "build/autoconf.data",

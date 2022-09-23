@@ -1,0 +1,132 @@
+name: Rebuild everything
+on:
+  schedule:
+    - cron:  '30 0 * * Mon'
+  workflow_dispatch:
+jobs:
+  test-bot:
+    name: Check syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - run: brew test-bot --only-cleanup-before
+
+      - run: brew test-bot --only-setup
+
+      - run: brew test-bot --only-tap-syntax
+
+  build-unit:
+    name: Build Unit
+    needs: test-bot
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit
+        run:
+          brew install --build-from-source unit
+
+  build-unit-perl:
+    name: Build Unit Perl module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit Perl module
+        run: |
+          brew install --build-from-source perl
+          brew install --build-from-source Formula/unit-perl.rb
+
+  build-unit-python:
+    name: Build Unit Python module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit Python module
+        run:
+          brew install --build-from-source Formula/unit-python.rb
+
+  build-unit-python3:
+    name: Build Unit Python 3 module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit Python 3 module
+        run:
+          brew install --build-from-source Formula/unit-python3.rb
+
+  build-unit-java:
+    name: Build Unit Java module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit Java module
+        run:
+          brew install --build-from-source Formula/unit-java.rb
+
+  build-unit-ruby:
+    name: Build Unit Ruby module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit Ruby module
+        run:
+          brew install --build-from-source Formula/unit-ruby.rb
+
+  build-unit-php:
+    name: Build Unit PHP module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Build Unit PHP module
+        run:
+          brew install --build-from-source Formula/unit-php.rb

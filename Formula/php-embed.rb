@@ -2,9 +2,15 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.1.0.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.1.0.tar.xz"
-  sha256 "a1317eff0723a2b3d3122bbfe107a1158570ea2822dc35a5fb360086db0f6bbc"
+  url "https://www.php.net/distributions/php-8.1.10.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.1.10.tar.xz"
+  sha256 "90e7120c77ee83630e6ac928d23bc6396603d62d83a3cf5df8a450d2e3070162"
+  license "PHP-3.01"
+
+  livecheck do
+    url "https://www.php.net/downloads"
+    regex(/href=.*?php[._-]v?(\d+(?:\.\d+)+)\.t/i)
+  end
 
   head do
     url "https://github.com/php/php-src.git"
@@ -16,19 +22,13 @@ class PhpEmbed < Formula
   depends_on "pkg-config" => :build
   depends_on "php"
 
-  # PHP build system incorrectly links system libraries
-  # see https://github.com/php/php-src/pull/3472
-  patch :DATA
+  on_macos do
+    # PHP build system incorrectly links system libraries
+    # see https://github.com/php/php-src/pull/3472
+    patch :DATA
+  end
 
   def install
-    if OS.mac? && (MacOS.version == :el_capitan || MacOS.version == :sierra)
-      # Ensure that libxml2 will be detected correctly in older MacOS
-      ENV["SDKROOT"] = MacOS.sdk_path
-    end
-
-    system "sed", "-e", "/darwin/,/;;/d", "-i", "", "sapi/cgi/config9.m4"
-    system "sed", "-e", "/darwin/,/;;/d", "-i", "", "sapi/cli/config.m4"
-
     # buildconf required due to system library linking bug patch
     system "./buildconf", "--force"
 
@@ -97,7 +97,6 @@ class PhpEmbed < Formula
       --enable-pcntl
       --enable-phpdbg
       --enable-phpdbg-readline
-      --enable-phpdbg-webhelper
       --enable-shmop
       --enable-soap
       --enable-sockets
@@ -107,6 +106,8 @@ class PhpEmbed < Formula
       --enable-embed=shared
       --with-bz2#{headers_path}
       --with-curl
+      --with-external-gd
+      --with-external-pcre
       --with-ffi
       --with-fpm-user=_www
       --with-fpm-group=_www
@@ -136,7 +137,6 @@ class PhpEmbed < Formula
       --with-sqlite3
       --with-tidy=#{Formula["tidy-html5"].opt_prefix}
       --with-unixODBC
-      --with-xmlrpc
       --with-xsl
       --with-zip
       --with-zlib

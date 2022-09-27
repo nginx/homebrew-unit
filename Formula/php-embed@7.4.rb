@@ -2,26 +2,26 @@ class PhpEmbedAT74 < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-7.4.26.tar.xz"
-  mirror "https://fossies.org/linux/www/php-7.4.26.tar.xz"
-  sha256 "e305b3aafdc85fa73a81c53d3ce30578bc94d1633ec376add193a1e85e0f0ef8"
+  url "https://www.php.net/distributions/php-7.4.30.tar.xz"
+  mirror "https://fossies.org/linux/www/php-7.4.30.tar.xz"
+  sha256 "ea72a34f32c67e79ac2da7dfe96177f3c451c3eefae5810ba13312ed398ba70d"
+  license "PHP-3.01"
+
+  livecheck do
+    url "https://www.php.net/downloads"
+    regex(/href=.*?php[._-]v?(#{Regexp.escape(version.major_minor)}(?:\.\d+)*)\.t/i)
+  end
 
   depends_on "pkg-config" => :build
   depends_on "php@7.4"
 
-  # PHP build system incorrectly links system libraries
-  # see https://github.com/php/php-src/pull/3472
-  patch :DATA
+  on_macos do
+    # PHP build system incorrectly links system libraries
+    # see https://github.com/php/php-src/pull/3472
+    patch :DATA
+  end
 
   def install
-    if OS.mac? && (MacOS.version == :el_capitan || MacOS.version == :sierra)
-      # Ensure that libxml2 will be detected correctly in older MacOS
-      ENV["SDKROOT"] = MacOS.sdk_path
-    end
-
-    system "sed", "-e", "/darwin/,/;;/d", "-i", "", "sapi/cgi/config9.m4"
-    system "sed", "-e", "/darwin/,/;;/d", "-i", "", "sapi/cli/config.m4"
-
     # buildconf required due to system library linking bug patch
     system "./buildconf", "--force"
 
@@ -168,11 +168,10 @@ class PhpEmbedAT74 < Formula
 end
 
 __END__
-diff --git a/build/php.m4 b/build/php.m4
-index 3624a33a8e..d17a635c2c 100644
---- a/build/php.m4
-+++ b/build/php.m4
-@@ -425,7 +425,7 @@ dnl
+diff -urN ./php-7.4.30.orig/build/php.m4 php-7.4.30/build/php.m4
+--- ./php-7.4.30.orig/build/php.m4	2022-09-26 21:54:31.000000000 +0400
++++ php-7.4.30/build/php.m4	2022-09-26 21:54:58.000000000 +0400
+@@ -425,7 +425,7 @@
  dnl Adds a path to linkpath/runpath (LDFLAGS).
  dnl
  AC_DEFUN([PHP_ADD_LIBPATH],[
@@ -181,7 +180,7 @@ index 3624a33a8e..d17a635c2c 100644
      PHP_EXPAND_PATH($1, ai_p)
      ifelse([$2],,[
        _PHP_ADD_LIBPATH_GLOBAL([$ai_p])
-@@ -470,7 +470,7 @@ dnl
+@@ -470,7 +470,7 @@
  dnl Add an include path. If before is 1, add in the beginning of INCLUDES.
  dnl
  AC_DEFUN([PHP_ADD_INCLUDE],[
@@ -190,11 +189,10 @@ index 3624a33a8e..d17a635c2c 100644
      PHP_EXPAND_PATH($1, ai_p)
      PHP_RUN_ONCE(INCLUDEPATH, $ai_p, [
        if test "$2"; then
-diff --git a/configure.ac b/configure.ac
-index 36c6e5e3e2..71b1a16607 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -190,6 +190,14 @@ PHP_ARG_WITH([libdir],
+diff -urN ./php-7.4.30.orig/configure.ac php-7.4.30/configure.ac
+--- ./php-7.4.30.orig/configure.ac	2022-09-26 21:54:28.000000000 +0400
++++ php-7.4.30/configure.ac	2022-09-26 21:54:58.000000000 +0400
+@@ -190,6 +190,14 @@
    [lib],
    [no])
 

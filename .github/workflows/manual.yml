@@ -145,4 +145,4 @@ jobs:
 
       - name: Build Unit PHP 7.4 module
         run:
-          brew install --build-from-source Formula/unit-php@7.4.rb
+          brew install --build-from-source Formula/unit-php74.rb

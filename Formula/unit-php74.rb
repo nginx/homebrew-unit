@@ -1,4 +1,4 @@
-class UnitPhpAT74 < Formula
+class UnitPhp74 < Formula
   desc "PHP module for Unit application server"
   homepage "https://unit.nginx.org"
   url "https://unit.nginx.org/download/unit-1.28.0.tar.gz"

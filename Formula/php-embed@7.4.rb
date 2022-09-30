@@ -159,7 +159,12 @@ class PhpEmbedAT74 < Formula
     system "make", "libphp7.la"
 
     lib.mkpath
-    cp ".libs/libphp7.dylib", "#{lib}/"
+    on_macos do
+      cp ".libs/libphp.dylib", "#{lib}/"
+    end
+    on_linux do
+      cp ".libs/libphp.so", "#{lib}/"
+    end
   end
 
   def php_version

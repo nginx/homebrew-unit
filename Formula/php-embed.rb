@@ -160,7 +160,12 @@ class PhpEmbed < Formula
     system "make", "libphp.la"
 
     lib.mkpath
-    cp ".libs/libphp.dylib", "#{lib}/"
+    on_macos do
+      cp ".libs/libphp.dylib", "#{lib}/"
+    end
+    on_linux do
+      cp ".libs/libphp.so", "#{lib}/"
+    end
   end
 
   def php_version

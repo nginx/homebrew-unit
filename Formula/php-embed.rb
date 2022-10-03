@@ -39,6 +39,8 @@ class PhpEmbed < Formula
               "APXS_LIBEXECDIR='$(INSTALL_ROOT)#{lib}/httpd/modules'"
       s.gsub! "-z `$APXS -q SYSCONFDIR`",
               "-z ''"
+      s.gsub! "${wl}-flat_namespace ${wl}-undefined ${wl}suppress",
+              "${wl}-twolevel_namespace"
     end
 
     # Update error message in apache sapi to better explain the requirements

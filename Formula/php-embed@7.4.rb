@@ -32,6 +32,8 @@ class PhpEmbedAT74 < Formula
               "APXS_LIBEXECDIR='$(INSTALL_ROOT)#{lib}/httpd/modules'"
       s.gsub! "-z `$APXS -q SYSCONFDIR`",
               "-z ''"
+      s.gsub! "${wl}-flat_namespace ${wl}-undefined ${wl}suppress",
+              "${wl}-twolevel_namespace"
 
       # apxs will interpolate the @ in the versioned prefix: https://bz.apache.org/bugzilla/show_bug.cgi?id=61944
       s.gsub! "LIBEXECDIR='$APXS_LIBEXECDIR'",

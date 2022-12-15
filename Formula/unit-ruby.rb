@@ -6,7 +6,7 @@ class UnitRuby < Formula
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
-  depends_on "ruby@2.7"
+  depends_on "ruby"
   depends_on "unit@1.29.0"
 
   def install
@@ -27,15 +27,15 @@ class UnitRuby < Formula
         "NXT_MODULES='#{HOMEBREW_PREFIX}/lib/unit/modules'",
         "NXT_MODULES='#{lib}/unit/modules'"
 
-    system "./configure", "ruby", "--module=ruby2.7",
-        "--ruby=#{Formula["ruby@2.7"].opt_prefix}/bin/ruby"
-    system "make", "ruby2.7-install"
+    system "./configure", "ruby", "--module=ruby",
+        "--ruby=#{Formula["ruby"].opt_prefix}/bin/ruby"
+    system "make", "ruby-install"
   end
 
   def caveats
     <<~EOS
       Make sure rack gem installed:
-        #{Formula["ruby@2.7"].opt_prefix}/bin/gem install rack
+        #{Formula["ruby"].opt_prefix}/bin/gem install rack
     EOS
   end
 
@@ -51,7 +51,7 @@ class UnitRuby < Formula
       {
         "listeners": { "*:#{port}": { "pass": "applications/test" } },
         "applications": {
-          "test": { "type": "ruby 2.7", "script": "#{testpath}/oper.ru" }
+          "test": { "type": "ruby", "script": "#{testpath}/oper.ru" }
         }
       }
     EOS

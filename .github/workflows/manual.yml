@@ -130,19 +130,3 @@ jobs:
       - name: Build Unit PHP module
         run:
           brew install --build-from-source Formula/unit-php.rb
-
-  build-unit-php74:
-    name: Build Unit PHP 7.4 module
-    needs: build-unit
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macOS-latest]
-    steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Build Unit PHP 7.4 module
-        run:
-          brew install --build-from-source Formula/unit-php74.rb

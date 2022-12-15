@@ -24,6 +24,9 @@ class Unit < Formula
 
     system "make"
     system "make", "install", "libunit-install"
+    bin.install "tools/setup-unit"
+    bin.install "tools/unitc"
+
   end
 
   def post_install

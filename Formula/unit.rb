@@ -8,7 +8,19 @@ class Unit < Formula
   depends_on "openssl@1.1"
   depends_on "pcre2"
 
+  resource "njs" do
+    url "https://hg.nginx.org/njs/archive/0.7.9.tar.gz"
+    sha256 "a97565c61a70ea65ea24aad232ca6b7a8fa1378c61501bd9cc7bdf9a64fc46c4"
+  end
+
   def install
+    resource("njs").stage buildpath/"njs"
+    cd "njs" do
+      system "./configure"
+      system "make", "libnjs", "njs"
+    end
+
+    ENV.prepend_path "PKG_CONFIG_PATH", buildpath/"njs/build"
     system "./configure",
               "--prefix=#{prefix}",
               "--sbindir=#{bin}",
@@ -19,6 +31,7 @@ class Unit < Formula
               "--state=#{var}/state/unit",
               "--tmp=/tmp",
               "--openssl",
+              "--njs",
               "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
               "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
 

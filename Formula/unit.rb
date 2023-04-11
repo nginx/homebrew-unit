@@ -5,9 +5,9 @@ class Unit < Formula
   sha256 "7d756cff8c1a40b38c313fdbe8748333ffce034a3916fa1b502d63cc10623437"
   head "https://hg.nginx.org/unit", using: :hg
 
-  depends_on "pkg-config"
   depends_on "openssl@1.1"
   depends_on "pcre2"
+  depends_on "pkg-config"
 
   resource "njs" do
     url "https://hg.nginx.org/njs/archive/0.7.10.tar.gz"

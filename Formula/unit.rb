@@ -1,8 +1,8 @@
 class Unit < Formula
   desc "Dynamic web and application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.29.1.tar.gz"
-  sha256 "7d756cff8c1a40b38c313fdbe8748333ffce034a3916fa1b502d63cc10623437"
+  url "https://unit.nginx.org/download/unit-1.30.0.tar.gz"
+  sha256 "129ba1b3c4e33dfadbd38683f0634152d8ecf770cacf3af50ee50b5683dc498b"
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
@@ -10,14 +10,14 @@ class Unit < Formula
   depends_on "pkg-config"
 
   resource "njs" do
-    url "https://hg.nginx.org/njs/archive/0.7.10.tar.gz"
-    sha256 "56f4aa35101a98ed4d76edee824f8e20b4e784abf4dc5433441ea08f12e7388f"
+    url "https://hg.nginx.org/njs/archive/0.7.12.tar.gz"
+    sha256 "af648336c236f625311edcd90b83f37702fadad160c2a5ed57b34656609e918a"
   end
 
   def install
     resource("njs").stage buildpath/"njs"
     cd "njs" do
-      system "./configure", "--no-libxml2"
+      system "./configure", "--no-libxml2", "--no-zlib"
       system "make", "libnjs", "njs"
       bin.install "build/njs" => "njs-unit"
     end

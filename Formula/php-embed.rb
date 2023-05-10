@@ -2,9 +2,9 @@ class PhpEmbed < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.2.0.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.2.0.tar.xz"
-  sha256 "6ea4c2dfb532950fd712aa2a08c1412a6a81cd1334dd0b0bf88a8e44c2b3a943"
+  url "https://www.php.net/distributions/php-8.2.5.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.2.5.tar.xz"
+  sha256 "800738c359b7f1e67e40c22713d2d90276bc85ba1c21b43d99edd43c254c5f76"
   license "PHP-3.01"
 
   livecheck do
@@ -24,7 +24,7 @@ class PhpEmbed < Formula
 
   on_macos do
     # PHP build system incorrectly links system libraries
-    # see https://github.com/php/php-src/pull/3472
+    # see https://github.com/php/php-src/issues/10680
     patch :DATA
   end
 
@@ -78,6 +78,10 @@ class PhpEmbed < Formula
     # sdk path or it won't find the headers
     headers_path = "=#{MacOS.sdk_path_if_needed}/usr" if OS.mac?
 
+    # `_www` only exists on macOS.
+    fpm_user = OS.mac? ? "_www" : "www-data"
+    fpm_group = OS.mac? ? "_www" : "www-data"
+
     args = %W[
       --prefix=#{prefix}
       --localstatedir=#{var}
@@ -111,8 +115,8 @@ class PhpEmbed < Formula
       --with-external-gd
       --with-external-pcre
       --with-ffi
-      --with-fpm-user=_www
-      --with-fpm-group=_www
+      --with-fpm-user=#{fpm_user}
+      --with-fpm-group=#{fpm_group}
       --with-gettext=#{Formula["gettext"].opt_prefix}
       --with-gmp=#{Formula["gmp"].opt_prefix}
       --with-iconv#{headers_path}

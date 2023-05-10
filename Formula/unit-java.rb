@@ -17,8 +17,8 @@ class UnitJava < Formula
               "--pid=#{var}/run/unit/unit.pid",
               "--control=unix:#{var}/run/unit/control.sock",
               "--modules=#{HOMEBREW_PREFIX}/lib/unit/modules",
-              "--state=#{var}/state/unit",
-              "--tmp=/tmp",
+              "--statedir=#{var}/state/unit",
+              "--tmpdir=/tmp",
               "--openssl",
               "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
               "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
@@ -59,7 +59,7 @@ class UnitJava < Formula
     system "#{HOMEBREW_PREFIX}/bin/unitd", "--log", "#{testpath}/unit.log",
                         "--control", "unix:#{testpath}/control.sock",
                         "--pid", "#{testpath}/unit.pid",
-                        "--state", "#{testpath}/state"
+                        "--statedir", "#{testpath}/state"
     sleep 3
 
     pid = File.open(testpath/"unit.pid").gets.chop.to_i

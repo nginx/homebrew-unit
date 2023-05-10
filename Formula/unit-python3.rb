@@ -1,13 +1,13 @@
 class UnitPython3 < Formula
   desc "Python3 module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.29.1.tar.gz"
-  sha256 "7d756cff8c1a40b38c313fdbe8748333ffce034a3916fa1b502d63cc10623437"
+  url "https://unit.nginx.org/download/unit-1.30.0.tar.gz"
+  sha256 "129ba1b3c4e33dfadbd38683f0634152d8ecf770cacf3af50ee50b5683dc498b"
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
   depends_on "python3"
-  depends_on "unit@1.29.1"
+  depends_on "unit@1.30.0"
 
   def install
     system "./configure",

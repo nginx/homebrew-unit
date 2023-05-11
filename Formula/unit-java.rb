@@ -24,8 +24,8 @@ class UnitJava < Formula
               "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
 
     inreplace "build/autoconf.data",
-        "NXT_MODULES='#{HOMEBREW_PREFIX}/lib/unit/modules'",
-        "NXT_MODULES='#{lib}/unit/modules'"
+        "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
+        "NXT_MODULESDIR='#{lib}/unit/modules'"
 
     inreplace "auto/modules/java",
          "$NXT_JAVAC -version 2>&1", "$NXT_JAVAC -version 2>/dev/null"

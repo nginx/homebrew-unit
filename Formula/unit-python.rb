@@ -25,8 +25,8 @@ class UnitPython < Formula
               "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
 
     inreplace "build/autoconf.data",
-        "NXT_MODULES='#{HOMEBREW_PREFIX}/lib/unit/modules'",
-        "NXT_MODULES='#{lib}/unit/modules'"
+        "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",
+        "NXT_MODULESDIR='#{lib}/unit/modules'"
 
     system "./configure", "python"
     system "make", "python-install"

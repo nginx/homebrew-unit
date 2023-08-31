@@ -1,19 +1,21 @@
 class UnitPerl < Formula
   desc "Perl module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.30.0.tar.gz"
-  sha256 "129ba1b3c4e33dfadbd38683f0634152d8ecf770cacf3af50ee50b5683dc498b"
+  url "https://unit.nginx.org/download/unit-1.31.0.tar.gz"
+  sha256 "268b1800bc4e030667e67967d052817437dff03f780ac0a985909aa225de61ed"
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openssl@1.1"
   depends_on "perl"
-  depends_on "unit@1.30.0"
+  depends_on "unit@1.31.0"
 
   def install
     system "./configure",
               "--prefix=#{prefix}",
               "--sbindir=#{bin}",
+              "--logdir=#{var}/log",
               "--log=#{var}/log/unit/unit.log",
+              "--runstatedir=#{var}/run",
               "--pid=#{var}/run/unit/unit.pid",
               "--control=unix:#{var}/run/unit/control.sock",
               "--modules=#{HOMEBREW_PREFIX}/lib/unit/modules",

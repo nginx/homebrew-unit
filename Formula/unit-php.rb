@@ -5,7 +5,7 @@ class UnitPhp < Formula
   sha256 "268b1800bc4e030667e67967d052817437dff03f780ac0a985909aa225de61ed"
   head "https://hg.nginx.org/unit", using: :hg
 
-  depends_on "openssl@1.1"
+  depends_on "openssl"
   depends_on "php-embed"
   depends_on "unit@1.31.0"
 
@@ -22,8 +22,8 @@ class UnitPhp < Formula
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
-              "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
+              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include",
+              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
 
     inreplace "build/autoconf.data",
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",

@@ -6,7 +6,7 @@ class UnitJava < Formula
   head "https://hg.nginx.org/unit", using: :hg
 
   depends_on "openjdk@11"
-  depends_on "openssl@1.1"
+  depends_on "openssl"
   depends_on "unit@1.31.0"
 
   def install
@@ -22,8 +22,8 @@ class UnitJava < Formula
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",
-              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
-              "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
+              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include",
+              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
 
     inreplace "build/autoconf.data",
         "NXT_MODULESDIR='#{HOMEBREW_PREFIX}/lib/unit/modules'",

@@ -5,7 +5,7 @@ class Unit < Formula
   sha256 "268b1800bc4e030667e67967d052817437dff03f780ac0a985909aa225de61ed"
   head "https://hg.nginx.org/unit", using: :hg
 
-  depends_on "openssl@1.1"
+  depends_on "openssl"
   depends_on "pcre2"
   depends_on "pkg-config"
 
@@ -36,8 +36,8 @@ class Unit < Formula
               "--tmpdir=/tmp",
               "--openssl",
               "--njs",
-              "--cc-opt=-I#{Formula["openssl@1.1"].opt_prefix}/include",
-              "--ld-opt=-L#{Formula["openssl@1.1"].opt_prefix}/lib"
+              "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include",
+              "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
 
     system "make"
     system "make", "install", "libunit-install"

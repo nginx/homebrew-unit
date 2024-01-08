@@ -3,7 +3,7 @@ class UnitPython < Formula
   homepage "https://unit.nginx.org"
   url "https://unit.nginx.org/download/unit-1.31.1.tar.gz"
   sha256 "9df604d49cb57ac0103202efb0f9373e3e48a7dd888c94af10d4f96ccded7d71"
-  head "https://hg.nginx.org/unit", using: :hg
+  head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on maximum_macos: :big_sur
   depends_on "openssl"

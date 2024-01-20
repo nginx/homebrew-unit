@@ -122,6 +122,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest]
+        php: [php, php@8.2]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -129,4 +130,4 @@ jobs:
 
       - name: Build Unit PHP module
         run:
-          brew install --build-from-source Formula/unit-php.rb
+          brew install --build-from-source Formula/unit-${{ matrix.php }}.rb

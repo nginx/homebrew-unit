@@ -1,10 +1,10 @@
-class PhpEmbed < Formula
+class PhpEmbedAT82 < Formula
   desc "PHP library for embedding in applications"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.3.2.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.3.2.tar.xz"
-  sha256 "4ffa3e44afc9c590e28dc0d2d31fc61f0139f8b335f11880a121b9f9b9f0634e"
+  url "https://www.php.net/distributions/php-8.2.15.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.2.15.tar.xz"
+  sha256 "eca5deac02d77d806838275f8a3024b38b35ac0a5d9853dcc71c6cbe3f1f8765"
   license "PHP-3.01"
 
   livecheck do
@@ -19,7 +19,7 @@ class PhpEmbed < Formula
     depends_on "re2c" => :build # required to generate PHP lexers
   end
 
-  depends_on "php"
+  depends_on "php@8.2"
 
   on_macos do
     # PHP build system incorrectly links system libraries

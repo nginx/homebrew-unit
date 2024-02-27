@@ -13,6 +13,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache

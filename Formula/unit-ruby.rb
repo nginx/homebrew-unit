@@ -6,7 +6,7 @@ class UnitRuby < Formula
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "openssl"
-  depends_on "ruby"
+  depends_on "ruby@3"
   depends_on "unit@1.31.1"
 
   def install

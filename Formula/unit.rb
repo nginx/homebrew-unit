@@ -1,8 +1,8 @@
 class Unit < Formula
   desc "Dynamic web and application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.31.1.tar.gz"
-  sha256 "9df604d49cb57ac0103202efb0f9373e3e48a7dd888c94af10d4f96ccded7d71"
+  url "https://unit.nginx.org/download/unit-1.32.0.tar.gz"
+  sha256 "4b5e9be3f3990fceabf06292c2b7853667aceb71fd8de5dc67cb7fb05d247a20"
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "openssl"

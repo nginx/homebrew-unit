@@ -34,5 +34,5 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae
+      - run: brew test-bot --build-dependents-from-source --only-formulae
         if: github.event_name == 'pull_request'

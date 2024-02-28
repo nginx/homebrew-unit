@@ -3,6 +3,7 @@ class UnitPerl < Formula
   homepage "https://unit.nginx.org"
   url "https://unit.nginx.org/download/unit-1.32.0.tar.gz"
   sha256 "4b5e9be3f3990fceabf06292c2b7853667aceb71fd8de5dc67cb7fb05d247a20"
+  revision 1
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "openssl"

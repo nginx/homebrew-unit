@@ -34,5 +34,12 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae
+      - run: brew test-bot --only-formulae-detect
+        id: formulae-detect
+
+      - run:
+          brew test-bot --only-formulae --testing-formulae=${{ env.NEED_PHP_EMBED }}${{ env.NEED_UNIT }}${{ steps.formulae-detect.outputs.testing_formulae }}
+        env:
+          NEED_PHP_EMBED: ${{ contains(steps.formulae-detect.outputs.testing_formulae, 'unit-php') && 'php-embed,' || '' }}
+          NEED_UNIT: ${{ contains(steps.formulae-detect.outputs.testing_formulae, 'unit-') && 'unit,' || '' }}
         if: github.event_name == 'pull_request'

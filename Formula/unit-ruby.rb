@@ -66,6 +66,8 @@ class UnitRuby < Formula
     EOS
     (testpath/"state/certs").mkpath
 
+    system "#{Formula["ruby"].opt_prefix}/bin/gem", "install", "rack"
+
     system "#{HOMEBREW_PREFIX}/bin/unitd", "--log", "#{testpath}/unit.log",
                         "--control", "unix:#{testpath}/control.sock",
                         "--pid", "#{testpath}/unit.pid",

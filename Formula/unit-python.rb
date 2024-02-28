@@ -5,6 +5,7 @@ class UnitPython < Formula
   sha256 "4b5e9be3f3990fceabf06292c2b7853667aceb71fd8de5dc67cb7fb05d247a20"
   head "https://github.com/nginx/unit.git", branch: "master"
 
+  depends_on :macos
   depends_on maximum_macos: :big_sur
   depends_on "openssl"
   depends_on "unit@1.32.0"

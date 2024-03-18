@@ -146,3 +146,21 @@ jobs:
       - name: Build Unit PHP module
         run:
           brew install --build-from-source Formula/unit-php.rb
+
+  build-unit-wasm:
+    name: Build Unit WASM module
+    needs: build-unit
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
+
+      - name: Build Unit WASM module
+        run:
+          brew install --build-from-source Formula/unit-wasm.rb

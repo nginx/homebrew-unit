@@ -25,6 +25,7 @@ jobs:
     needs: test-bot
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:
@@ -43,6 +44,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:
@@ -62,6 +64,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [macOS-11]
     steps:
@@ -80,6 +83,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:
@@ -98,6 +102,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:
@@ -116,6 +121,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:
@@ -134,6 +140,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:
@@ -152,6 +159,7 @@ jobs:
     needs: build-unit
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
     steps:

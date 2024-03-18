@@ -11,6 +11,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - run: brew test-bot --only-cleanup-before
 
@@ -29,6 +31,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit
         run:
@@ -45,6 +49,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit Perl module
         run: |
@@ -62,6 +68,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit Python module
         run:
@@ -78,6 +86,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit Python 3 module
         run:
@@ -94,6 +104,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit Java module
         run:
@@ -110,6 +122,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit Ruby module
         run:
@@ -126,6 +140,8 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
 
       - name: Build Unit PHP module
         run:

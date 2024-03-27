@@ -23,7 +23,6 @@ class PhpEmbed < Formula
   depends_on "php"
 
   on_macos do
-    depends_on "imap-uw"
 
     # PHP build system incorrectly links system libraries
     # see https://github.com/php/php-src/issues/10680
@@ -152,8 +151,6 @@ class PhpEmbed < Formula
 
     if OS.mac?
       args << "--enable-dtrace"
-      args << "--with-imap=#{Formula["imap-uw"].opt_prefix}"
-      args << "--with-imap-ssl=#{Formula["openssl@3"].opt_prefix}"
       args << "--with-ldap-sasl"
       args << "--with-os-sdkpath=#{MacOS.sdk_path_if_needed}"
     else

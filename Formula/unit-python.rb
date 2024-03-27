@@ -1,14 +1,14 @@
 class UnitPython < Formula
   desc "Python module for Unit application server"
   homepage "https://unit.nginx.org"
-  url "https://unit.nginx.org/download/unit-1.32.0.tar.gz"
-  sha256 "4b5e9be3f3990fceabf06292c2b7853667aceb71fd8de5dc67cb7fb05d247a20"
+  url "https://unit.nginx.org/download/unit-1.32.1.tar.gz"
+  sha256 "0e440ef63a3adf9400db978a64fc84e1eb8887f61a04ccff284c3f682fb83ea2"
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on :macos
   depends_on maximum_macos: :big_sur
   depends_on "openssl"
-  depends_on "unit@1.32.0"
+  depends_on "unit@1.32.1"
   uses_from_macos "python"
 
   def install

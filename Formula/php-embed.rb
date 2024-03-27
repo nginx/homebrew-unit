@@ -23,7 +23,6 @@ class PhpEmbed < Formula
   depends_on "php"
 
   on_macos do
-
     # PHP build system incorrectly links system libraries
     # see https://github.com/php/php-src/issues/10680
     patch :DATA

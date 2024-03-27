@@ -10,8 +10,8 @@ class Unit < Formula
   depends_on "pkg-config"
 
   resource "njs" do
-    url "https://hg.nginx.org/njs/archive/0.8.3.tar.gz"
-    sha256 "b7afc0e67cf1be8f9ea4b1e6133026e7fb6b8953fafc947d0778ca48a0aa1e64"
+    url "https://hg.nginx.org/njs/archive/0.8.2.tar.gz"
+    sha256 "86915b5046661466b324e08300696a74b8ffbe9b69fa9acbc10e9c487ac98cf8"
   end
 
   def install

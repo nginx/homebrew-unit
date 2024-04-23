@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -59,25 +59,6 @@ jobs:
           brew install --build-from-source perl
           brew install --build-from-source Formula/unit-perl.rb
 
-  build-unit-python:
-    name: Build Unit Python 2 module
-    needs: build-unit
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-11]
-    steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-        with:
-          core: true
-
-      - name: Build Unit Python module
-        run:
-          brew install --build-from-source Formula/unit-python.rb
-
   build-unit-python3:
     name: Build Unit Python 3 module
     needs: build-unit
@@ -85,7 +66,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -104,7 +85,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -123,7 +104,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -142,7 +123,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -161,7 +142,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-11, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew

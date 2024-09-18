@@ -20,7 +20,26 @@ class PhpEmbed < Formula
   end
 
   depends_on "pkg-config" => :build
+  depends_on "argon2"
+  depends_on "aspell"
+  depends_on "curl"
+  depends_on "freetds"
+  depends_on "gd"
+  depends_on "gettext"
+  depends_on "gmp"
+  depends_on "icu4c"
+  depends_on "krb5"
+  depends_on "libpq"
+  depends_on "libsodium"
+  depends_on "libzip"
+  depends_on "oniguruma"
+  depends_on "openldap"
+  depends_on "openssl@3"
+  depends_on "pcre2"
   depends_on "php"
+  depends_on "sqlite"
+  depends_on "tidy-html5"
+  depends_on "unixodbc"
 
   on_macos do
     # PHP build system incorrectly links system libraries

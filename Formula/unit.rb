@@ -16,7 +16,31 @@ class Unit < Formula
         revision: "9d4bf6c60aa60a828609f64d1b5c50f71bb7ef62"
   end
 
+  resource "unitctl" do
+    src_repo = "https://github.com/nginx/unit"
+    if OS.mac? && Hardware::CPU.intel?
+      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-x86_64-apple-darwin"
+      sha256 "e649163262ec4839eccf2178e7852abf9057c852ace84db7a3d82a7347c3e05e"
+    elsif OS.mac? && Hardware::CPU.arm?
+      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-aarch64-apple-darwin"
+      sha256 "d49c3da15534b2ed20d70a0fb2ff47d5d0911140229bc1ebabf8a7ec62b01083"
+    elsif OS.linux? && Hardware::CPU.intel?
+      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-x86_64-unknown-linux-gnu"
+      sha256 "484a70cfc1bb4ccae41ede0f22e6a552adf4cc609280d178b600142a424d5840"
+    elsif OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-aarch64-unknown-linux-gnu"
+      sha256 "ca690c1c7d625e507aa110020dbb930569247d91107e1e75a21b1e3b298a4dc7"
+    else
+      odie "Unsupported architecture"
+    end
+  end
+
   def install
+    resource("unitctl").stage buildpath/"unitctl"
+    cd "unitctl" do
+      bin.install Dir.glob("unitctl-*").first => "unitctl"
+    end
+
     resource("njs").stage buildpath/"njs"
     cd "njs" do
       system "./configure", "--no-libxml2", "--no-zlib", "--no-openssl"

@@ -20,7 +20,7 @@ class UnitWasm < Formula
               "--runstatedir=#{var}/run",
               "--pid=#{var}/run/unit/unit.pid",
               "--control=unix:#{var}/run/unit/control.sock",
-              "--modules=#{HOMEBREW_PREFIX}/lib/unit/modules",
+              "--modulesdir=#{HOMEBREW_PREFIX}/lib/unit/modules",
               "--statedir=#{var}/state/unit",
               "--tmpdir=/tmp",
               "--openssl",

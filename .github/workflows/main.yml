@@ -90,4 +90,4 @@ jobs:
               formula="nginx/unit/unit,$formula"
               ;;
           esac
-          brew test-bot --only-formulae --testing-formulae="$formula"
+          brew test-bot --only-formulae --testing-formulae="$formula" --fail-fast

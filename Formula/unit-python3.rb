@@ -7,7 +7,7 @@ class UnitPython3 < Formula
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "openssl@3"
-  depends_on "python3"
+  depends_on "python@3.12"
   depends_on "unit@1.33.0"
 
   def install

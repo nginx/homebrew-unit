@@ -6,7 +6,7 @@ class UnitPerl < Formula
       revision: "24ed91f40634372d99f67f0e4e3c2ac0abde81bd"
   head "https://github.com/nginx/unit.git", branch: "master"
 
-  depends_on "openssl"
+  depends_on "openssl@3"
   depends_on "perl"
   depends_on "unit@1.33.0"
 

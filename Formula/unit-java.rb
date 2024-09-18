@@ -7,7 +7,7 @@ class UnitJava < Formula
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "openjdk@11"
-  depends_on "openssl"
+  depends_on "openssl@3"
   depends_on "unit@1.33.0"
 
   def install

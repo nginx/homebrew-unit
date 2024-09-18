@@ -8,7 +8,7 @@ class UnitPython < Formula
 
   depends_on :macos
   depends_on maximum_macos: :big_sur
-  depends_on "openssl"
+  depends_on "openssl@3"
   depends_on "unit@1.33.0"
   uses_from_macos "python"
 

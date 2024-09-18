@@ -1,14 +1,61 @@
 name: brew test-bot
+
 on:
-  push:
-    branches: master
   pull_request:
+
 jobs:
-  test-bot:
+  check-generate:
+    runs-on: macOS-latest
+    outputs:
+      matrix: ${{ steps.generate-matrix.outputs.matrix }}
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: true
+
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+
+      - name: Install Homebrew Bundler RubyGems
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: brew install-bundler-gems
+
+      - run: brew test-bot --only-tap-syntax
+
+      - run: brew test-bot --only-formulae-detect
+        id: formulae-detect
+
+      - name: generate matrix
+        id: generate-matrix
+        run: |
+          JSON="{\"include\":["
+          for os in macos-latest ubuntu-latest; do
+          for formula in $( echo ${{ steps.formulae-detect.outputs.testing_formulae }} | tr ',' ' ' ); do
+            JSON="$JSON$( jq -nRr '( $ARGS.positional[] | { os: $os, formulae: . }) | tojson' --arg os "$os" --args "$formula" ),"
+          done
+          done
+
+          if [[ "$JSON" == *, ]]; then
+            JSON="${JSON%?}"
+          fi
+          JSON="$JSON]}"
+          echo "$JSON"
+          echo "matrix=$JSON" >> "$GITHUB_OUTPUT"
+
+  build-formulae:
+    name: ${{ matrix.os }}, ${{ matrix.formulae }}
+    needs: check-generate
     runs-on: ${{ matrix.os }}
     strategy:
-      matrix:
-        os: [ubuntu-latest, macOS-latest]
+      matrix: ${{fromJson(needs.check-generate.outputs.matrix)}}
+
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -32,14 +79,15 @@ jobs:
 
       - run: brew test-bot --only-setup
 
-      - run: brew test-bot --only-tap-syntax
-
-      - run: brew test-bot --only-formulae-detect
-        id: formulae-detect
-
-      - run:
-          brew test-bot --only-formulae --testing-formulae=${{ env.NEED_PHP_EMBED }}${{ env.NEED_UNIT }}${{ steps.formulae-detect.outputs.testing_formulae }}
-        env:
-          NEED_PHP_EMBED: ${{ contains(steps.formulae-detect.outputs.testing_formulae, 'unit-php') && 'php-embed,' || '' }}
-          NEED_UNIT: ${{ contains(steps.formulae-detect.outputs.testing_formulae, 'unit-') && 'unit,' || '' }}
-        if: github.event_name == 'pull_request'
+      - name: build ${{ matrix.formulae }}
+        run: |
+          formula=${{ matrix.formulae }}
+          case "$formula" in
+            *-php)
+              formula="nginx/unit/php-embed,nginx/unit/unit,$formula"
+              ;;
+            *unit-*)
+              formula="nginx/unit/unit,$formula"
+              ;;
+          esac
+          brew test-bot --only-formulae --testing-formulae="$formula"

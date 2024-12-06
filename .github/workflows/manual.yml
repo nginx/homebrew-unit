@@ -6,7 +6,7 @@ on:
 jobs:
   test-bot:
     name: Check syntax
-    runs-on: ubuntu-24.04
+    runs-on: macOS-14
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew

@@ -6,7 +6,7 @@ on:
 jobs:
   test-bot:
     name: Check syntax
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-13, macOS-14, macOS-15]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-13, macOS-14, macOS-15]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -66,7 +66,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-13, macOS-14, macOS-15]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -85,7 +85,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -104,7 +104,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -123,7 +123,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -142,7 +142,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macOS-12, macOS-13, macOS-14]
+        os: [ubuntu-24.04, macOS-12, macOS-13, macOS-14]
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew

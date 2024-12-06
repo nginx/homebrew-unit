@@ -5,7 +5,7 @@ on:
 
 jobs:
   check-generate:
-    runs-on: macOS-latest
+    runs-on: macOS-14
     outputs:
       matrix: ${{ steps.generate-matrix.outputs.matrix }}
     steps:
@@ -36,7 +36,7 @@ jobs:
         id: generate-matrix
         run: |
           JSON="{\"include\":["
-          for os in macos-latest ubuntu-latest; do
+          for os in macos-14 ubuntu-24.04; do
           for formula in $( echo ${{ steps.formulae-detect.outputs.testing_formulae }} | tr ',' ' ' ); do
             JSON="$JSON$( jq -nRr '( $ARGS.positional[] | { os: $os, formulae: . }) | tojson' --arg os "$os" --args "$formula" ),"
           done

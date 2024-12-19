@@ -2,34 +2,35 @@ class Unit < Formula
   desc "Dynamic web and application server"
   homepage "https://unit.nginx.org"
   url "https://github.com/nginx/unit.git",
-      tag:      "1.33.0",
-      revision: "24ed91f40634372d99f67f0e4e3c2ac0abde81bd"
+      tag:      "1.34.0",
+      revision: "27bde184dedcbf687db2f314c60c037623318a8d"
   head "https://github.com/nginx/unit.git", branch: "master"
 
+  depends_on "rust" => :build
   depends_on "openssl@3"
   depends_on "pcre2"
   depends_on "pkg-config"
 
   resource "njs" do
     url "https://github.com/nginx/njs.git",
-        tag:      "0.8.5",
-        revision: "9d4bf6c60aa60a828609f64d1b5c50f71bb7ef62"
+        tag:      "0.8.8",
+        revision: "78e3edf7505cd04a5df0b7936bcd2d89e95bdda8"
   end
 
   resource "unitctl" do
     src_repo = "https://github.com/nginx/unit"
     if OS.mac? && Hardware::CPU.intel?
       url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-x86_64-apple-darwin"
-      sha256 "e649163262ec4839eccf2178e7852abf9057c852ace84db7a3d82a7347c3e05e"
+      sha256 "3dcc9367bcda782c366d93d86287a30d902c63c5d26b4e80db41f2b5f53449a4"
     elsif OS.mac? && Hardware::CPU.arm?
       url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-aarch64-apple-darwin"
-      sha256 "d49c3da15534b2ed20d70a0fb2ff47d5d0911140229bc1ebabf8a7ec62b01083"
+      sha256 "2789f5d39229800cac942324ad9b17832d7bf5b628c232af81bd5af96a20fc85"
     elsif OS.linux? && Hardware::CPU.intel?
       url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-x86_64-unknown-linux-gnu"
-      sha256 "484a70cfc1bb4ccae41ede0f22e6a552adf4cc609280d178b600142a424d5840"
+      sha256 "b83d2c20bc072eeb05fedb21e536248d105ed5f25e895c0a8bd8bca48dcb0b13"
     elsif OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "#{src_repo}/releases/download/#{Unit.version}/unitctl-#{Unit.version}-aarch64-unknown-linux-gnu"
-      sha256 "ca690c1c7d625e507aa110020dbb930569247d91107e1e75a21b1e3b298a4dc7"
+      sha256 "f7c98e35b1ac8a946e3c0653e0a34473d25b0ed27152757d5b9f42ef06eb12a4"
     else
       odie "Unsupported architecture"
     end
@@ -43,7 +44,7 @@ class Unit < Formula
 
     resource("njs").stage buildpath/"njs"
     cd "njs" do
-      system "./configure", "--no-libxml2", "--no-zlib", "--no-openssl"
+      system "./configure", "--no-libxml2", "--no-zlib", "--no-openssl", "--no-quickjs"
       system "make", "libnjs", "njs"
       bin.install "build/njs" => "njs-unit"
     end
@@ -62,6 +63,7 @@ class Unit < Formula
               "--tmpdir=/tmp",
               "--openssl",
               "--njs",
+              "--otel",
               "--cc-opt=-I#{Formula["openssl"].opt_prefix}/include",
               "--ld-opt=-L#{Formula["openssl"].opt_prefix}/lib"
 

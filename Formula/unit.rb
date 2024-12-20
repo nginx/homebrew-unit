@@ -36,6 +36,9 @@ class Unit < Formula
     end
   end
 
+  # a fix to build on macOS with otel
+  patch :DATA
+
   def install
     resource("unitctl").stage buildpath/"unitctl"
     cd "unitctl" do
@@ -118,3 +121,92 @@ class Unit < Formula
     Process.kill("TERM", pid)
   end
 end
+
+__END__
+index 183e95c7..e5a2d825 100644
+--- a/auto/make
++++ b/auto/make
+@@ -157,11 +157,12 @@ libnxt:	$NXT_BUILD_DIR/lib/$NXT_LIB_SHARED $NXT_BUILD_DIR/lib/$NXT_LIB_STATIC
+ $NXT_BUILD_DIR/lib/$NXT_LIB_SHARED: \$(NXT_LIB_OBJS) \$(NXT_OTEL_LIB_LOC)
+ 	\$(PP_LD) \$@
+ 	\$(v)\$(NXT_SHARED_LOCAL_LINK) -o \$@ \$(NXT_LIB_OBJS) \\
+-		$NXT_LIBM $NXT_LIBS $NXT_LIB_AUX_LIBS \$(NXT_OTEL_LIB_LOC)
++		\$(NXT_OTEL_LIB_LOC) \\
++		$NXT_LIBM $NXT_LIBS $NXT_LIB_AUX_LIBS
+ 
+-$NXT_BUILD_DIR/lib/$NXT_LIB_STATIC: \$(NXT_LIB_OBJS) \$(NXT_OTEL_LIB_LOC)
++$NXT_BUILD_DIR/lib/$NXT_LIB_STATIC: \$(NXT_LIB_OBJS)
+ 	\$(PP_AR) \$@
+-	\$(v)$NXT_STATIC_LINK \$@ \$(NXT_LIB_OBJS) \$(NXT_OTEL_LIB_LOC)
++	\$(v)$NXT_STATIC_LINK \$@ \$(NXT_LIB_OBJS)
+ 
+ $NXT_BUILD_DIR/lib/$NXT_LIB_UNIT_STATIC: \$(NXT_LIB_UNIT_OBJS) \\
+ 		$NXT_BUILD_DIR/share/pkgconfig/unit.pc \\
+@@ -379,7 +380,8 @@ $NXT_BUILD_DIR/sbin/$NXT_DAEMON:	$NXT_BUILD_DIR/lib/$NXT_LIB_STATIC \\
+ 	\$(PP_LD) \$@
+ 	\$(v)\$(NXT_EXEC_LINK) -o \$@ \$(CFLAGS) \\
+ 		\$(NXT_OBJS) $NXT_BUILD_DIR/lib/$NXT_LIB_STATIC \\
+-		$NXT_LIBM $NXT_LIBS $NXT_LIB_AUX_LIBS \$(NXT_OTEL_LIB_LOC)
++		\$(NXT_OTEL_LIB_LOC) \\
++		$NXT_LIBM $NXT_LIBS $NXT_LIB_AUX_LIBS
+ 
+ END
+ 
+diff --git a/auto/otel b/auto/otel
+index f23aac3b..dad5590a 100644
+--- a/auto/otel
++++ b/auto/otel
+@@ -21,26 +21,33 @@ if [ $NXT_OTEL = YES ]; then
+ 
+     $echo -n "  - "
+ 
+-    nxt_feature="OpenSSL library"
+-    nxt_feature_run=yes
+-    nxt_feature_incs=
+-    nxt_feature_libs="-lssl -lcrypto"
+-    nxt_feature_test="#include <openssl/ssl.h>
+-
+-                      int main(void) {
+-                          SSL_library_init();
+-                          return 0;
+-                      }"
+-    . auto/feature
+-
+-    if [ ! $nxt_found = yes ]; then
+-        $echo
+-        $echo $0: error: OpenTelemetry support requires OpenSSL.
+-        $echo
+-        exit 1;
+-    fi
+-
+-    NXT_OTEL_LIBS="-lssl -lcrypto"
++    case "$NXT_SYSTEM" in
++        Darwin)
++            NXT_OTEL_LIBS="-framework CoreFoundation -framework Security -framework SystemConfiguration"
++            ;;
++        *)
++            nxt_feature="OpenSSL library"
++            nxt_feature_run=yes
++            nxt_feature_incs=
++            nxt_feature_libs="-lssl -lcrypto"
++            nxt_feature_test="#include <openssl/ssl.h>
++
++                              int main(void) {
++                                  SSL_library_init();
++                                  return 0;
++                              }"
++            . auto/feature
++
++            if [ ! $nxt_found = yes ]; then
++                $echo
++                $echo $0: error: OpenTelemetry support requires OpenSSL.
++                $echo
++                exit 1;
++            fi
++
++            NXT_OTEL_LIBS="-lssl -lcrypto"
++            ;;
++    esac
+ 
+     cat << END >> $NXT_AUTO_CONFIG_H
+ 

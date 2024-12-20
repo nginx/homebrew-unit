@@ -7,6 +7,7 @@ class Unit < Formula
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "rust" => :build
+  depends_on "libedit"
   depends_on "openssl@3"
   depends_on "pcre2"
   depends_on "pkg-config"

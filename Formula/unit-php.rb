@@ -2,13 +2,13 @@ class UnitPhp < Formula
   desc "PHP module for Unit application server"
   homepage "https://unit.nginx.org"
   url "https://github.com/nginx/unit.git",
-      tag:      "1.34.1",
-      revision: "ed6f67d14dc5d03c2b5d10d5bb6eb237f9c9b896"
+      tag:      "1.34.2",
+      revision: "8ab74a8cc929272eb8683d3f6ab4cb406465fd34"
   head "https://github.com/nginx/unit.git", branch: "master"
 
   depends_on "openssl@3"
   depends_on "php-embed"
-  depends_on "unit@1.34.1"
+  depends_on "unit@1.34.2"
 
   def install
     system "./configure",
